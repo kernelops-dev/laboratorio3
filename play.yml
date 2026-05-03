@@ -1,0 +1,42 @@
+# play.yml
+---
+- name: Update web servers
+  hosts: myhosts
+  remote_user: root
+
+# Actualizar Cache de paquetes
+  tasks:
+    - name: Actualizar caché de APT
+      ansible.builtin.apt:
+        update_cache: true
+# Instalar Nginx
+    - name: Instalar Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+# Iniciamos UFW
+    - name: Habilitar UFW
+      community.general.ufw:
+        state: enabled
+        policy: deny
+
+# Configurar UFW para permitir solo trafico por puerto TCP 80 y 22
+    - name: Configuracion de ufw
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop:
+        - '80'
+        - '22'
+
+# Desplegar pagina web personalizada
+    - name: Desplegar pagina web en Nginx
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+...

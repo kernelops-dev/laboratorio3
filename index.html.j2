@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Mundo - {{ ansible_hostname }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .info {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        .info p {
+            margin: 5px 0;
+            word-break: break-word;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="emoji">🌍✨</span>
+        <h1>¡Hola Mundo!</h1>
+        <div class="info">
+            <p><strong>📍 Dirección IP:</strong> {{ ansible_default_ipv4.address }}</p>
+            <p><strong>🖥️ Hostname:</strong> {{ ansible_hostname }}</p>
+            <p><strong>🐧 SO:</strong> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+            <p><strong>🧠 Arquitectura:</strong> {{ ansible_architecture }}</p>
+        </div>
+    </div>
+</body>
+</html>
